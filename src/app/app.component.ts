@@ -11,10 +11,11 @@ export class AppComponent {
 
   categories: any[] = [];
   products: any[] = [];
-
+  dataProducts: any[] = [];
   constructor() {
     this.categories = CATEGORIES.slice(0);
     this.products = PRODUCTS.slice(0);
+    this.dataProducts = this.products;
 
     console.log(this.products);
     $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
@@ -32,18 +33,18 @@ export class AppComponent {
       return false;
     });
 
-    this.getByCategory(1);
+  
 
   }
 
   getByCategory(id: number) {
     console.log('ok');
-    this.products = [];
+    this.dataProducts = [];
     for (let i = 0; i < this.products.length; i++) {
 
       if (this.products[i].sublevel_id === id) {
 
-        console.log(this.products[i]);
+        this.dataProducts.push(this.products[i]);
 
       }
 
