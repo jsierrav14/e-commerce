@@ -32,5 +32,22 @@ export class AppComponent {
       return false;
     });
 
+    this.getByCategory(1);
+
+  }
+
+  getByCategory(id: number) {
+    console.log('ok');
+    this.products = [];
+    for (let i = 0; i < this.products.length; i++) {
+
+      if (this.products[i].sublevel_id === id) {
+
+        console.log(this.products[i]);
+
+      }
+
+    }
+
   }
 }
