@@ -15,33 +15,40 @@
       
       <div class="container-fluid">
       
-        <div class="row" id="cont">
-            <div class="col-md-12">
-                <h1>Todos los productos</h1>
-             </div>
-          <div class="col-xs-6" id="cont-search">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" #value placeholder="Buscar por nombre" aria-label="Recipient's username" aria-describedby="basic-addon2" >
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" (click)="searchByName(value.value)" >Buscar</button>
+            <div class="row" id="cont">
+                    <div class="col-md-12">
+                        <h1>Todos los productos</h1>
+                     </div>
+                  <div class="col-xs-12" id="cont-search">
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" #value placeholder="Buscar por nombre" aria-label="Recipient's username" aria-describedby="basic-addon2" >
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" (click)="searchByName(value.value)" >Buscar</button>
+                      </div>
+                    </div>
+                  
+                  <div class="col-xs-4">
+                      
+                    <div class="form-group" id="order">
+                         <label for="label">Ordenar por </label>
+                      <select class="form-control" id="exampleFormControlSelect1" (change)="order(products,$event)">
+                        <option value="quatity">Cantidad</option>
+                        <option value="price">Precio</option>
+                        <option value="name">Nombre</option>
+                        <option value="available">Disponibilidad</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-xs-2">
+                        <button type="button" class="btn btn-primary" (click)="goToCar()">
+                                <i class="material-icons">add_shopping_cart</i> <span class="badge badge-light">{{amount}}</span>
+                              </button>
+                       
+                </div>
+          
               </div>
-            </div>
-      
-          </div>
-          <div class="col-xs-6">
               
-            <div class="form-group">
-                 <label for="label">Ordenar por </label>
-              <select class="form-control" id="exampleFormControlSelect1" (change)="order(products,$event)">
-                <option value="quatity">Cantidad</option>
-                <option value="price">Precio</option>
-                <option value="name">Nombre</option>
-                <option value="available">Disponibilidad</option>
-              </select>
-            </div>
-          </div>
-      
-        </div>
+                </div>
       
         <div class="row" id="cont-products">
        
@@ -54,7 +61,7 @@
                   <span class="badge badge-primary">{{p.quantity}}</span>
                 </h6>
                 <p class="card-text">Precio: ${{p.price}}</p>
-                <a href="#" class="btn btn-success">Agregar al carrito</a>
+                <a (click)="addToCar(p)" class="btn btn-success">Agregar al carrito</a>
               </div>
             </div>
           </div>

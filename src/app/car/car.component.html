@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1 class="display-4">Lista de productos</h1>
+
+            <div class="list-group">
+                <a *ngFor="let p of products" class="list-group-item list-group-item-action flex-column align-items-start ">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{p.name}}</h5>
+                        <small class="badge badge-light">${{p.price}}</small>
+                    </div>
+               
+                    <small>Donec id elit non mi porta.</small>
+                </a>
+              
+            </div>
+            <hr class="my-4">
+            <p>Cantidad: {{amount}}</p>
+            <p>Total a pagar: {{total}}</p>
+
+            <p class="lead">
+                <a class="btn btn-success btn-lg" (click)="open(content);pay()" role="button">Pagar</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirmar</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Seguro desea pagar estos productos?&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Aceptar</button>
+        </div>
+      </ng-template>

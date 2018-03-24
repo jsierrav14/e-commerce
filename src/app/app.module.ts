@@ -7,6 +7,8 @@ import { ProductListComponent } from './product/product-list.component';
 import { ProductDetailsComponent } from './product/product-details.component';
 import * as $ from 'jquery';
 import { LayoutComponent } from './layout/layout.component';
+import { CarComponent } from './car/car.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -15,10 +17,12 @@ import { LayoutComponent } from './layout/layout.component';
     LayoutComponent,
     ProductListComponent,
     ProductDetailsComponent,
+    CarComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
