@@ -1,54 +1,60 @@
+<div class="container-fluid">
 
- <div class="container-fluid">
-      
-        <div class="row" id="cont">
-            <div class="col-md-12">
-                <h1>{{name}}</h1>
-             </div>
-          <div class="col-xs-12" id="cont-search">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" #value placeholder="Buscar por nombre" aria-label="Recipient's username" aria-describedby="basic-addon2" >
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" (click)="searchByName(value.value)" >Buscar</button>
-              </div>
-            </div>
-          
-          <div class="col-xs-4">
-              
-            <div class="form-group" id="order">
-                 <label for="label">Ordenar por </label>
-              <select class="form-control" id="exampleFormControlSelect1" (change)="order(products,$event)">
-                <option value="quatity">Cantidad</option>
-                <option value="price">Precio</option>
-                <option value="name">Nombre</option>
-                <option value="available">Disponibilidad</option>
-              </select>
-            </div>
+  <div class="row" id="cont">
+    <div class="col-md-12">
+      <h1>{{name}}</h1>
+    </div>
+    <div class="row" id="cont-search">
+      <div class="col-md-5">
+        <div class="input-group ">
+          <input type="text" class="form-control" #value placeholder="Buscar por nombre" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="searchByName(value.value)">Buscar</button>
           </div>
-          <div class="col-xs-2">
-                <button type="button" class="btn btn-primary" (click)="goToCar()">
-                        <i class="material-icons">add_shopping_cart</i> <span class="badge badge-light">{{amount}}</span>
-                      </button>
-               
         </div>
-  
       </div>
-      
+
+
+      <div class="col-md-3">
+
+        <div id="order">
+          <label for="label">Ordenar por </label>
+          <select class="form-control" id="exampleFormControlSelect1" (change)="order(products,$event)">
+            <option value="quatity">Cantidad</option>
+            <option value="price">Precio</option>
+            <option value="name">Nombre</option>
+            <option value="available">Disponibilidad</option>
+          </select>
         </div>
-      
-        <div class="row" id="cont-products">
-       
-       
-          <div class="col-xs-3" *ngFor="let p of dataProducts;">
-            <div class="card" style="width: 18rem;margin:10px">
-              <div class="card-body">
-                <h5 class="card-title">{{p.name}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Cantidad
-                  <span class="badge badge-primary">{{p.quantity}}</span>
-                </h6>
-                <p class="card-text">Precio: ${{p.price}}</p>
-                <a (click)="addToCart(p)" class="btn btn-success">Agregar al carrito</a>
-              </div>
-            </div>
-          </div>
-          </div>
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-primary">Ver todos</button>
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-primary" (click)="goToCar()">
+          <i class="material-icons">add_shopping_cart</i>
+          <span class="badge badge-light">{{amount}}</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row" id="cont-products">
+
+
+    <div class="col-xs-3" *ngFor="let p of dataProducts;">
+      <div class="card" style="width: 18rem;margin:10px">
+        <div class="card-body">
+          <h5 class="card-title">{{p.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Cantidad
+            <span class="badge badge-primary">{{p.quantity}}</span>
+          </h6>
+          <p class="card-text">Precio: ${{p.price}}</p>
+          <a (click)="addToCart(p)" class="btn btn-success">Agregar al carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -12,7 +12,7 @@ export class AppComponent {
 
   categories: any[] = [];
   products: any[] = [];
-  productsCart:any[]=[];
+  productsCart: any[] = [];
   dataProducts: any[] = [];
   constructor(private router: Router) {
     this.categories = CATEGORIES.slice(0);
@@ -42,7 +42,7 @@ export class AppComponent {
 
   goToCategory(id: number, name: string) {
 
-    this.router.navigate(['category/', id,name]);
+    this.router.navigate(['category/', id, name]);
   }
   getByCategory(id: number) {
     console.log('ok');

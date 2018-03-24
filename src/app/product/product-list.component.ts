@@ -25,6 +25,12 @@ export class ProductListComponent implements OnInit {
 
         this.products = PRODUCTS.slice(0);
         console.log(this.products);
+        const productsAux = localStorage.getItem('products');
+        if (productsAux) {
+
+            this.productsCart = JSON.parse(productsAux);
+            console.log(this.productsCart);
+        }
     }
 
 
@@ -35,9 +41,10 @@ export class ProductListComponent implements OnInit {
 
         this.getByCategory(this.id);
 
-        if (localStorage.getItem('amount') !== "0") {
-             const amountaux = localStorage.getItem('amount');
-             this.amount = parseInt(amountaux.toString());
+
+        const amountaux = localStorage.getItem('amount');
+        if (amountaux) {
+            this.amount = parseInt(amountaux.toString());
         }
 
     }
@@ -52,6 +59,27 @@ export class ProductListComponent implements OnInit {
         localStorage.setItem('products', JSON.stringify(this.productsCart));
         localStorage.setItem('amount', this.amount.toString());
         localStorage.setItem('total', this.total.toString());
+    }
+
+    listAll(){
+        this.dataProducts = this.products;
+    }
+
+
+    searchByName(value: any) {
+        console.log(value);
+        this.dataProducts = [];
+
+        for (let i = 0; i < this.products.length; i++) {
+
+            if (this.products[i].name == value) {
+
+                this.dataProducts.push(this.products[i]);
+
+            }
+
+        }
+        console.log(this.dataProducts);
     }
 
     getByCategory(id: number) {

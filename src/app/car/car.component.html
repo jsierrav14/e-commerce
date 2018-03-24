@@ -11,6 +11,8 @@
                     </div>
                
                     <small>Donec id elit non mi porta.</small>
+                    <button class="btn btn-danger" id="btn-delete" (click)="deleteProduct(p.id)"><i class="material-icons">delete</i></button>
+
                 </a>
               
             </div>
@@ -19,7 +21,7 @@
             <p>Total a pagar: {{total}}</p>
 
             <p class="lead">
-                <a class="btn btn-success btn-lg" (click)="open(content);pay()" role="button">Pagar</a>
+                <a class="btn btn-success btn-lg" (click)="open(content)" role="button">Pagar</a>
             </p>
         </div>
     </div>
@@ -36,6 +38,6 @@
           <p>Seguro desea pagar estos productos?&hellip;</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Aceptar</button>
+          <button type="button" class="btn btn-outline-dark" (click)="c('Close click');pay()">Aceptar</button>
         </div>
       </ng-template>

@@ -20,8 +20,9 @@
           <li class="dropdown-submenu" *ngFor="let s of categories[i].sublevels;let j = index;" (click)="goToCategory(s.id, c.name)">
             <a class="dropdown-item" tabindex="-1">{{s.name}}</a>
             <ul class="dropdown-menu">
+              
               <li class="dropdown-item" *ngFor="let s1 of categories[i].sublevels[j].sublevels;" (click)="goToCategory(s1.id,c.name)">
-                <a href="#">{{s1.name}}</a>
+                <a >{{s1.name}}</a>
               </li>
             </ul>
           </li>

@@ -13,7 +13,7 @@ export class LayoutComponent {
     categories: any[] = [];
     products: any[] = [];
     dataProducts: any[] = [];
-
+    productsJson: any[] = [];
 
     productsCart: any[] = [];
 
@@ -42,10 +42,13 @@ export class LayoutComponent {
             return false;
         });
 
-        if (localStorage.getItem('amount') !== "0") {
-            const amountaux = localStorage.getItem('amount');
+        const amountaux = localStorage.getItem('amount');
+        if (amountaux) {
+
             this.amount = parseInt(amountaux.toString());
         }
+
+
 
 
     }
@@ -86,15 +89,34 @@ export class LayoutComponent {
         console.log(this.dataProducts);
     }
 
-    order(p_array_json, event) {
-        p_array_json.sort(function (a, b) {
-            return a[event.target.value] > b[event.target.value];
-        });
+    order(event) {
+        console.log(event.target.value);
+
+        if (event.target.value !== 'name') {
+
+            this.products.sort(function (a, b) {
+                return (b[event.target.value] - a[event.target.value]);
+            });
+        } else {
+
+            this.products.sort(function (a, b) {
+                const textA = a.name.toUpperCase();
+                const  textB = b.name.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            })
+
+        }
     }
 
 
     addToCar(product: any) {
 
+        const productsAux = localStorage.getItem('products');
+
+        if (productsAux) {
+            this.productsCart = JSON.parse(productsAux);
+
+        }
         this.productsCart.push(product);
         this.amount++;
         this.total = this.total + product.price;
