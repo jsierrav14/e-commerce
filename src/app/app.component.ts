@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CATEGORIES } from './data/data.categories';
 import { PRODUCTS } from './data/data.products';
 import * as $ from 'jquery';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,8 +12,9 @@ export class AppComponent {
 
   categories: any[] = [];
   products: any[] = [];
+  productsCart:any[]=[];
   dataProducts: any[] = [];
-  constructor() {
+  constructor(private router: Router) {
     this.categories = CATEGORIES.slice(0);
     this.products = PRODUCTS.slice(0);
     this.dataProducts = this.products;
@@ -33,10 +35,15 @@ export class AppComponent {
       return false;
     });
 
-  
+
 
   }
 
+
+  goToCategory(id: number, name: string) {
+
+    this.router.navigate(['category/', id,name]);
+  }
   getByCategory(id: number) {
     console.log('ok');
     this.dataProducts = [];
@@ -50,5 +57,27 @@ export class AppComponent {
 
     }
 
+  }
+
+  searchByName(value: any) {
+    console.log(value);
+    this.dataProducts = [];
+
+    for (let i = 0; i < this.products.length; i++) {
+
+      if (this.products[i].name === value) {
+
+        this.dataProducts.push(this.products[i]);
+
+      }
+
+    }
+    console.log(this.dataProducts);
+  }
+
+  order(p_array_json, event) {
+    p_array_json.sort(function (a, b) {
+      return a[event.target.value] > b[event.target.value];
+    });
   }
 }
