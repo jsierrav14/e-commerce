@@ -36,7 +36,7 @@
                           <div id="order">
                             <select class="form-control" id="exampleFormControlSelect1" (change)="order($event)">
                               <option value="name">Ordenar por</option>
-                              <option value="quatity">Cantidad</option>
+                              <option value="quantity">Cantidad</option>
                               <option value="price">Precio</option>
                               <option value="name">Nombre</option>
                               <option value="available">Disponibilidad</option>
@@ -44,7 +44,7 @@
                           </div>
                         </div>
                         <div class="col-xs-6 col-md-3"  style="margin-top:6px">
-                          <button class="btn btn-primary">Ver todos</button>
+                          <button class="btn btn-primary" (click)="listAll()">Ver todos</button>
                         </div>
                         <div class="col-xs-6 col-md-1" style="margin-top:6px">
                           <button type="button" class="btn btn-primary" (click)="goToCar()">

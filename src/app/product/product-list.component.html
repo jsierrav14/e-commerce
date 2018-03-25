@@ -5,7 +5,7 @@
       <h1>{{name}}</h1>
     </div>
     <div class="row" id="cont-search">
-      <div class="col-md-5">
+      <div class="col-xs-12 col-md-5" style="margin-top:6px">
         <div class="input-group ">
           <input type="text" class="form-control" #value placeholder="Buscar por nombre" aria-label="Recipient's username" aria-describedby="basic-addon2">
           <div class="input-group-append">
@@ -15,22 +15,22 @@
       </div>
 
 
-      <div class="col-md-3">
+      <div class="col-xs-6 col-md-3" style="margin-top:6px">
 
         <div id="order">
-          <label for="label">Ordenar por </label>
-          <select class="form-control" id="exampleFormControlSelect1" (change)="order(products,$event)">
-            <option value="quatity">Cantidad</option>
+          <select class="form-control" id="exampleFormControlSelect1" (change)="order($event)">
+            <option value="name">Ordenar por</option>
+            <option value="quantity">Cantidad</option>
             <option value="price">Precio</option>
             <option value="name">Nombre</option>
             <option value="available">Disponibilidad</option>
           </select>
         </div>
       </div>
-      <div class="col-md-3">
-        <button class="btn btn-primary">Ver todos</button>
+      <div class="col-xs-6 col-md-3" style="margin-top:6px">
+        <button class="btn btn-primary" (click)="listAll()">Ver todos</button>
       </div>
-      <div class="col-md-1">
+      <div class="col-xs-6 col-md-1" style="margin-top:6px">
         <button type="button" class="btn btn-primary" (click)="goToCar()">
           <i class="material-icons">add_shopping_cart</i>
           <span class="badge badge-light">{{amount}}</span>
@@ -56,5 +56,8 @@
           <a (click)="addToCart(p)" class="btn btn-success">Agregar al carrito</a>
         </div>
       </div>
+    </div>
+    <div *ngIf="dataProducts.length==0" class="alert alert-warning col-xs-12" role="alert">
+      No se encontro el producto
     </div>
   </div>

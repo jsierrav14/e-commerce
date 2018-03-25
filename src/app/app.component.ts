@@ -42,7 +42,8 @@ export class AppComponent {
 
   goToCategory(id: number, name: string) {
 
-    this.router.navigate(['category/', id, name]);
+    this.router.navigateByUrl('category/' + id + '/' + name);
+    location.reload();
   }
   getByCategory(id: number) {
     console.log('ok');

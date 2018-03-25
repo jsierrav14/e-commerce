@@ -4,17 +4,21 @@
             <h1 class="display-4">Lista de productos</h1>
 
             <div class="list-group">
-                <a *ngFor="let p of products" class="list-group-item list-group-item-action flex-column align-items-start ">
+                <a *ngFor="let p of products;let i=index " class="list-group-item list-group-item-action flex-column align-items-start ">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{p.name}}</h5>
                         <small class="badge badge-light">${{p.price}}</small>
                     </div>
-               
                     <small>Donec id elit non mi porta.</small>
-                    <button class="btn btn-danger" id="btn-delete" (click)="deleteProduct(p.id)"><i class="material-icons">delete</i></button>
+                    <br>
+                    <input type="number" class="form-control" [value]="p.amount" (change)="changeAmount(i,$event)">
+
+                    <button class="btn btn-danger" id="btn-delete" (click)="deleteProduct(i,p.id)">
+                        <i class="material-icons">delete</i>
+                    </button>
 
                 </a>
-              
+
             </div>
             <hr class="my-4">
             <p>Cantidad: {{amount}}</p>
@@ -25,19 +29,22 @@
             </p>
         </div>
     </div>
+    <div class="col-xs-12">
+
+    </div>
 </div>
 
 <ng-template #content let-c="close" let-d="dismiss">
-        <div class="modal-header">
-          <h4 class="modal-title">Confirmar</h4>
-          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <div class="modal-header">
+        <h4 class="modal-title">Confirmar</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Seguro desea pagar estos productos?&hellip;</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="c('Close click');pay()">Aceptar</button>
-        </div>
-      </ng-template>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Seguro desea pagar estos productos?&hellip;</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click');pay()">Aceptar</button>
+    </div>
+</ng-template>

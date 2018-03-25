@@ -14,6 +14,7 @@ export class ProductListComponent implements OnInit {
     categories: any[] = [];
     products: any[] = [];
     dataProducts: any[] = [];
+    productAux:any[] = [];
     productsCart: any[] = [];
 
     id: number;
@@ -23,6 +24,8 @@ export class ProductListComponent implements OnInit {
 
     constructor(private activeRouted: ActivatedRoute, private router: Router) {
 
+        this.id = this.activeRouted.snapshot.params['id'];
+        this.name = this.activeRouted.snapshot.params['name'];
         this.products = PRODUCTS.slice(0);
         console.log(this.products);
         const productsAux = localStorage.getItem('products');
@@ -35,8 +38,7 @@ export class ProductListComponent implements OnInit {
 
 
     ngOnInit() {
-        this.id = this.activeRouted.snapshot.params['id'];
-        this.name = this.activeRouted.snapshot.params['name'];
+     
         console.log(this.id);
 
         this.getByCategory(this.id);
@@ -51,6 +53,14 @@ export class ProductListComponent implements OnInit {
 
     addToCart(product: any) {
 
+   
+        const productsAux = localStorage.getItem('products');
+        product['amount'] = 1;
+        console.log(product);
+        if (productsAux) {
+            this.productsCart = JSON.parse(productsAux);
+
+        }
         this.productsCart.push(product);
         this.amount++;
         this.total = this.total + product.price;
@@ -62,23 +72,43 @@ export class ProductListComponent implements OnInit {
     }
 
     listAll(){
-        this.dataProducts = this.products;
+       this.getByCategory(this.id);
     }
 
 
+    order(event) {
+        console.log(event.target.value);
+
+        if (event.target.value !== 'name') {
+
+            this.dataProducts.sort(function (a, b) {
+                return (b[event.target.value] - a[event.target.value]);
+            });
+        } else {
+
+            this.dataProducts.sort(function (a, b) {
+                const textA = a.name.toUpperCase();
+                const  textB = b.name.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            })
+
+        }
+    }
+
     searchByName(value: any) {
         console.log(value);
-        this.dataProducts = [];
+        this.productAux = [];
 
-        for (let i = 0; i < this.products.length; i++) {
+        for (let i = 0; i < this.dataProducts.length; i++) {
 
-            if (this.products[i].name == value) {
+            if (this.dataProducts[i].name == value) {
 
-                this.dataProducts.push(this.products[i]);
+                this.productAux.push(this.dataProducts[i]);
 
             }
 
         }
+        this.dataProducts = this.productAux;
         console.log(this.dataProducts);
     }
 

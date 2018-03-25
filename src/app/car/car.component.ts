@@ -17,7 +17,7 @@ export class CarComponent implements OnInit {
     amount: string;
     total: string;
 
-    constructor(private modalService: NgbModal, private router:Router) {
+    constructor(private modalService: NgbModal, private router: Router) {
 
     }
     ngOnInit() {
@@ -32,6 +32,7 @@ export class CarComponent implements OnInit {
 
     }
     pay() {
+
         localStorage.clear();
         this.router.navigate(['']);
 
@@ -54,21 +55,46 @@ export class CarComponent implements OnInit {
             return `with: ${reason}`;
         }
     }
-    deleteProduct(id: any) {
+
+    changeAmount(index: number, event: any) {
+        const amountAux = localStorage.getItem('amount');
+        let aux: number = Number(amountAux) - Number(this.products[index].amount);
+        console.log(aux);
+
+        this.products[index].amount = event.target.value;
+        this.products[index].price = this.products[index].price * event.target.value;
+
+
+        aux = Number(aux) + Number(event.target.value);
+        this.amount = aux.toString();
+        localStorage.setItem('amount', this.amount);
+        localStorage.setItem('products', JSON.stringify(this.products));
+        const auxProducts = localStorage.getItem('products');
+
+        this.products = JSON.parse(auxProducts);
+
+        let totalAux = 0;
         for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
-                let totalAux = parseInt(this.total);
-                let amountAux = parseInt(this.amount);
-                amountAux--;
-                totalAux = totalAux - this.products[i].price;
-
-                this.total = totalAux.toString();
-                this.amount = amountAux.toString();
-
-                this.products.splice(i, 1);
-                break;
-            }
+            totalAux += this.products[i].price;
         }
+
+        this.total = totalAux.toString();
+        localStorage.setItem('total', this.total);
+
+    }
+    deleteProduct(index: number, id: any) {
+        let amountAux = Number(localStorage.getItem('amount'));
+        amountAux -= this.products[index].amount;
+        this.amount = amountAux.toString();
+        this.products.splice(index, 1);
+
+        let totalAux = 0;
+
+        for (let i = 0; i < this.products.length; i++) {
+            totalAux += this.products[i].price;
+        }
+        this.total = totalAux.toString();
+  
 
         localStorage.setItem('products', JSON.stringify(this.products));
         localStorage.setItem('amount', this.amount);

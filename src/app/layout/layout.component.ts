@@ -88,6 +88,9 @@ export class LayoutComponent {
         }
         console.log(this.dataProducts);
     }
+    listAll() {
+        this.dataProducts = this.products;
+    }
 
     order(event) {
         console.log(event.target.value);
@@ -101,7 +104,7 @@ export class LayoutComponent {
 
             this.products.sort(function (a, b) {
                 const textA = a.name.toUpperCase();
-                const  textB = b.name.toUpperCase();
+                const textB = b.name.toUpperCase();
                 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
             })
 
@@ -112,7 +115,8 @@ export class LayoutComponent {
     addToCar(product: any) {
 
         const productsAux = localStorage.getItem('products');
-
+        product['amount'] = 1;
+        console.log(product);
         if (productsAux) {
             this.productsCart = JSON.parse(productsAux);
 
